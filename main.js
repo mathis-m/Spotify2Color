@@ -140,8 +140,11 @@ else
 						if(getMode() === 1){
 							bg.style.backgroundColor = `${getCurColor()}`;
 						}
-						if(getMode() === 2 || getMode() === 0){
+						if(getMode() === 0){
 							bg.style.backgroundColor = `${getRandomColors(1)[0]}`;
+						}
+						if(getMode() === 2){
+							bg.style.backgroundColor = `white`;
 						}
 					}, (beat.start * 1000) - start_ms));
 				}
