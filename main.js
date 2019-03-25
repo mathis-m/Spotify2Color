@@ -145,10 +145,8 @@ else
 							bg.style.backgroundColor = `${getRandomColors(1)[0]}`;
 						}
 						if(getMode() === 2){
-							setTimeout(() => {
-								setColor(curSegment.pitches, 100);
-								bg.style.backgroundColor = `${getCurColor()}`;
-							}, 0);
+							setColor(curSegment.pitches, 100);
+							bg.style.backgroundColor = `${getCurColor()}`;
 						}
 					}, (beat.start * 1000) - start_ms));
 				}
