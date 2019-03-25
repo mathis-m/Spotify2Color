@@ -99,7 +99,16 @@ else
 			let rgb = [];
 			for (let i = 0; i < pitches.length; i = i + 4)
 			{
-				rgb.push((pitches.slice(i, i+3).reduce((pv, cv) => pv + cv, 0) / 4) * 100);
+				let p;
+				if(i === 0){
+					p = [.5,.2,.2,.1];
+				} else if(i === 4){
+					p = [.2,.5,.2,.1];
+				} else if(i === 8){
+					p = [.1,.2,.3,.4];
+				}
+				let j = 0;
+				rgb.push(pitches.slice(i, i+3).reduce((pv, cv) => pv + (cv * p[j++]) * 100);
 					
 			}
 			curColor = colorTemplate(...rgb);
