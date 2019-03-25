@@ -97,9 +97,9 @@ else
 		const setColor = (pitches) => {
 			const colorTemplate = (r, g, b) => `rgb(${r}%,${g}%,${b}%)`;
 			let rgb = [];
-			for (let i = 0; i < pitches.length; i = i + 3)
+			for (let i = 0; i < pitches.length; i = i + 4)
 			{
-				rgb.push((pitches.slice(i-3, i).reduce((pv, cv) => pv + cv, 0) / 3) * 100);
+				rgb.push((pitches.slice(i-4, i).reduce((pv, cv) => pv + cv, 0) / 4) * 100);
 			}
 			curColor = colorTemplate(...rgb.reverse());
 		};
