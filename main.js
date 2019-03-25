@@ -99,10 +99,7 @@ else
 			let rgb = [];
 			for (let i = 0; i < pitches.length; i = i + 4)
 			{
-				rgb.push((pitches.slice(i-4, i).reduce((pv, cv) => pv + cv, 0) / 4) * 100);
-				rgb[rgb.length -1] += 20;
-				if(rgb[rgb.length -1] > 100)
-					rgb[rgb.length -1] = 100;
+				rgb.push((pitches.slice(i, i+3).reduce((pv, cv) => pv + cv, 0) / 4) * 100);
 					
 			}
 			curColor = colorTemplate(...rgb.reverse());
