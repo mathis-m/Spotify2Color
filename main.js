@@ -109,8 +109,8 @@ else
 				}
 				let j = 0;
 				const forColor = pitches.slice(i, i+3).reduce((pv, cv) => pv + (cv * p[j++]) * 100, 0);
-				let overAllOther = [pitches.slice(0, i-1 < 0 ? 0: i - 1),...pitches.slice(i+4, pitches.length - 1)].reduce((pv, cv) => pv + cv * 100, 0) / (pitches.length - 4);
-				rgb.push((forColor * .8) + (overAllOther * .2));
+				let overAllOther = [...pitches.slice(0, i-1 < 0 ? 0: i - 1),...pitches.slice(i+4, pitches.length - 1)].reduce((pv, cv) => pv + cv * 100, 0) / (pitches.length - 4);
+				rgb.push(((forColor * .8) + (overAllOther * .2)));
 			}
 			curColor = colorTemplate(...rgb);
 		};
