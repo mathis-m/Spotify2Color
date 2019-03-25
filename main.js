@@ -43,23 +43,18 @@ const getColorForPitchN = (n) => {
 	return {
 		...ret,
 		add: function (color) {
-			console.log(colors);
 			this.r += color.r;
 			this.g += color.g;
 			this.b += color.b;
-			console.log(colors);
 			return this;
 		},
 		multiply: function (d) {
-			console.log(colors);
-			
 			this.r *= d;
 			this.g *= d;
 			this.b *= d;
-			console.log(colors);
 			return this;
 		},
-		valueOf: function () {
+		getRGB: function () {
 			return [this.r, this.g, this.b];
 		}
 	};
@@ -181,7 +176,7 @@ else
 		
 		const setColor = (rgb = getColorFor(curSegment.pitches), alpha) => {
 			const colorTemplate = (r, g, b) => `rgb${alpha ? 'a' : ''}(${r}%,${g}%,${b}%${alpha ? `,${alpha}%` : ''})`;
-			curColor = colorTemplate(...rgb.valueOf());
+			curColor = colorTemplate(...rgb.getRGB());
 		};
 		const getCurColor = () => curColor;
 		let curSegment;
