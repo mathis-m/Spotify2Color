@@ -138,7 +138,8 @@ else
 					timeOutIds.push(setTimeout(() => {
 						tempDom.innerText = beat.start;
 						if(getMode() === 1){
-							bg.style.backgroundColor = `${getCurColor()}`;
+							bg.style.backgroundColor = `white`;
+							setTimeout(()=>bg.style.backgroundColor = `${getCurColor()}`,1);
 						}
 						if(getMode() === 0){
 							bg.style.backgroundColor = `${getRandomColors(1)[0]}`;
