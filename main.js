@@ -102,7 +102,7 @@ else
 				rgb.push((pitches.slice(i, i+3).reduce((pv, cv) => pv + cv, 0) / 4) * 100);
 					
 			}
-			curColor = colorTemplate(...rgb.reverse());
+			curColor = colorTemplate(...rgb);
 		};
 		const getCurColor = () => curColor;
 		const setSegments = async () => {
