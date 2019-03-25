@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test LED</title>
+</head>
+<body>
+<style>
+	html, body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+<div id="bg" style="width: 100%; height: 100%; display: flex; flex-direction: row; justify-content: space-between">
+	<div id="temp" style="color: white;">
+		<label>
+			Color Mode(0: rndm on beat, 1: color from pitches on beat, 2: pitch color on segment + rndm on beat)
+			<input id="mode" type="number" max="2" min="0">
+			<button id="setMode">Set Mode</button>
+		</label>
+	</div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
