@@ -96,7 +96,7 @@ else
 
 		let curColor = '';
 		const setColor = (pitches, alpha) => {
-			const colorTemplate = (r, g, b) => `rgb(${r}%,${g}%,${b}%${alpha ? `,${alpha}%`:''})`;
+			const colorTemplate = (r, g, b) => `rgb${alpha ? 'a':''}(${r}%,${g}%,${b}%${alpha ? `,${alpha}%`:''})`;
 			let rgb = [];
 			for (let i = 0; i < pitches.length; i = i + 4)
 			{
