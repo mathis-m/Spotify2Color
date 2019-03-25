@@ -116,7 +116,7 @@ else
 			curColor = colorTemplate(...rgb);
 		};
 		const getCurColor = () => curColor;
-		const curSegment;
+		let curSegment;
 		const setSegments = async () => {
 			data.segments.forEach(segment => {
 				if (segment.start * 1000 >= start_ms)
