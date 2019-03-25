@@ -149,7 +149,7 @@ else
 						}
 						if(getMode() === 2){
 							setTimeout(() => {
-								setColor(undefined, 100);
+								setColor(curSegment.pitches, 100);
 								bg.style.backgroundColor = `${getCurColor()}`;
 							},0);
 						}
