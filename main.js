@@ -1,4 +1,65 @@
 const urlParams = new URLSearchParams(window.location.search);
+const getColorForPitchN = (n) => {
+	let ret;
+	switch (n)
+	{
+		case 0:
+			ret = {r: 255, g: 0, b: 0};
+			break;
+		case 1:
+			ret = {r: 255, g: 127, b: 0};
+			break;
+		case 2:
+			ret = {r: 255, g: 255, b: 0};
+			break;
+		case 3:
+			ret = {r: 127, g: 255, b: 0};
+			break;
+		case 4:
+			ret = {r: 0, g: 255, b: 0};
+			break;
+		case 5:
+			ret = {r: 0, g: 255, b: 127};
+			break;
+		case 6:
+			ret = {r: 0, g: 255, b: 255};
+			break;
+		case 7:
+			ret = {r: 0, g: 127, b: 255};
+			break;
+		case 8:
+			ret = {r: 0, g: 0, b: 255};
+			break;
+		case 9:
+			ret = {r: 127, g: 0, b: 255};
+			break;
+		case 10:
+			ret = {r: 255, g: 0, b: 255};
+			break;
+		case 11:
+			ret = {r: 255, g: 0, b: 127};
+			break;
+	}
+	return {
+		...ret,
+		add: (color) => {
+			this.r += color.r;
+			this.g += color.g;
+			this.b += color.b;
+		},
+		multiply: (d) => {
+			this.r *= d;
+			this.g *= d;
+			this.b *= d;
+		},
+		valueOf: () => [this.r, this.g, this.b]
+	};
+};
+const colors = [];
+for (let i = 0; i < 12; i++)
+{
+	colors.push(getColorForPitchN(i));
+}
 let mode = +document.getElementById('mode').value;
 document.getElementById('setMode').addEventListener('click', () => mode = +document.getElementById('mode').value);
 const getMode = () => mode;
@@ -93,31 +154,29 @@ else
 		
 		const bg = document.getElementById('bg');
 		const tempDom = document.getElementById('temp');
-
+		
 		let curColor = '';
-		const setColor = (pitches = curSegment.pitches, alpha) => {
-			const colorTemplate = (r, g, b) => `rgb${alpha ? 'a':''}(${r}%,${g}%,${b}%${alpha ? `,${alpha}%`:''})`;
-			let rgb = [];
-			for (let i = 0; i < pitches.length; i = i + 4)
+		
+		
+		const getColorFor = (pitches) => {
+			const res = {...colors[0]};
+			for (let i = 1; i < pitches.length; i++)
 			{
-				let p;
-				if(i === 0){
-					p = [.5,.2,.2,.1];
-				} else if(i === 4){
-					p = [.2,.5,.2,.1];
-				} else if(i === 8){
-					p = [.1,.2,.3,.4];
-				}
-				let j = 0;
-				const forColor = pitches.slice(i, i+3).reduce((pv, cv) => pv + (cv * p[j++]) * 100, 0);
-				let overAllOther = [...pitches.slice(0, i-1 < 0 ? 0: i - 1),...pitches.slice(i+4, pitches.length - 1)].reduce((pv, cv) => pv + cv * 100, 0) / (pitches.length - 4);
-				rgb.push(((forColor * .8) + (overAllOther * .2)));
+				res.add(colors[i].multiply(pitches[i]));
 			}
-			curColor = colorTemplate(...rgb);
+			return res;
+		};
+		
+		
+		
+		
+		const setColor = (rgb = getColorFor(curSegment.pitches), alpha) => {
+			const colorTemplate = (r, g, b) => `rgb${alpha ? 'a' : ''}(${r}%,${g}%,${b}%${alpha ? `,${alpha}%` : ''})`;
+			curColor = colorTemplate(...rgb.valueOf());
 		};
 		const getCurColor = () => curColor;
 		let curSegment;
-
+		
 		const setSegments = async () => {
 			data.segments.forEach(segment => {
 				if (segment.start * 1000 >= start_ms)
@@ -125,12 +184,13 @@ else
 					timeOutIds.push(setTimeout(() => {
 						curSegment = segment;
 						tempDom.innerText = segment.start;
-						if(getMode() === 2){
-							setColor(segment.pitches, 70);
-							bg.style.backgroundColor =`${getCurColor()}`;
+						if (getMode() === 2)
+						{
+							setColor(getColorFor(segment.pitches), 70);
+							bg.style.backgroundColor = `${getCurColor()}`;
 							return;
 						}
-						setColor(segment.pitches);
+						setColor(getColorFor(segment.pitches));
 					}, (segment.start * 1000) - start_ms));
 				}
 			})
@@ -141,17 +201,20 @@ else
 				{
 					timeOutIds.push(setTimeout(() => {
 						tempDom.innerText = beat.start;
-						if(getMode() === 1){
+						if (getMode() === 1)
+						{
 							bg.style.backgroundColor = `${getCurColor()}`;
 						}
-						if(getMode() === 0){
+						if (getMode() === 0)
+						{
 							bg.style.backgroundColor = `${getRandomColors(1)[0]}`;
 						}
-						if(getMode() === 2){
+						if (getMode() === 2)
+						{
 							setTimeout(() => {
 								setColor(undefined, 100);
 								bg.style.backgroundColor = `${getCurColor()}`;
-							},0);
+							}, 0);
 						}
 					}, (beat.start * 1000) - start_ms));
 				}
@@ -172,3 +235,5 @@ else
 	window.open(`https://accounts.spotify.com/authorize?client_id=19427274dbcb4d988f8c3e032508ad5a&response_type=code&redirect_uri=${encodeURIComponent('https://mathis-m.github.io/Spotify2Color/')}&scope=user-read-currently-playing&show_dialog=true`, 'Login with Spotify', 'width=800,height=600');
 	
 }
+
+
