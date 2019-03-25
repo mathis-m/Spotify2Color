@@ -48,10 +48,10 @@ const getColorForPitchN = (n) => {
 			this.b += color.b;
 			return this;
 		},
-		multiply: (d) => {
-			r *= d;
-			g *= d;
-			b *= d;
+		multiply: function (d) {
+			this.r *= d;
+			this.g *= d;
+			this.b *= d;
 			return this;
 		},
 		valueOf: function () {
