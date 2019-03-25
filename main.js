@@ -22,7 +22,7 @@ else
 					"Content-Type": "application/x-www-form-urlencoded",
 					"Authorization": `Basic MTk0MjcyNzRkYmNiNGQ5ODhmOGMzZTAzMjUwOGFkNWE6MDAxMDM1NDUwYTJlNDMxNGJiYTkyZDJiYjU3NDdjZmU=`
 				},
-				body: `code=${code}&grant_type=authorization_code&redirect_uri=${encodeURIComponent('http://127.0.0.1/')}`
+				body: `code=${code}&grant_type=authorization_code&redirect_uri=${encodeURIComponent('https://mathis-m.github.io/Spotify2Color/')}`
 			}).then(res => res.json());
 	
 	const getCurSong = (ac) => {
