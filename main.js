@@ -48,10 +48,10 @@ const getColorForPitchN = (n) => {
 			this.b += color.b;
 			return this;
 		},
-		multiply: function (d) {
-			this.r *= d;
-			this.g *= d;
-			this.b *= d;
+		multiply: (d) => {
+			r *= d;
+			g *= d;
+			b *= d;
 			return this;
 		},
 		valueOf: function () {
@@ -135,7 +135,7 @@ else
 		* Do Some thing to visualize
 		* */
 		const getRandomColors = (n) => {
-			const colors = [];
+			const colors1 = [];
 			var letters = '0123456789ABCDEF';
 			var color = '#';
 			for (var j = 0; j < 6; j++)
@@ -144,10 +144,10 @@ else
 			}
 			for (let i = 0; i < n; i++)
 			{
-				colors.push(color);
+				colors1.push(color);
 			}
 			
-			return colors;
+			return colors1;
 		};
 		
 		const song = await getCurSong(ac);
@@ -168,7 +168,7 @@ else
 			res.multiply(pitches[0]);
 			for (let i = 1; i < pitches.length; i++)
 			{
-				res.add(arr[i].multiply(pitches[i]));
+				res.add({...arr[i]}.multiply(pitches[i]));
 			}
 			return res;
 		};
