@@ -95,7 +95,7 @@ else
 		const tempDom = document.getElementById('temp');
 
 		let curColor = '';
-		const setColor = (pitches, alpha) => {
+		const setColor = (pitches = curSegment, alpha) => {
 			const colorTemplate = (r, g, b) => `rgb${alpha ? 'a':''}(${r}%,${g}%,${b}%${alpha ? `,${alpha}%`:''})`;
 			let rgb = [];
 			for (let i = 0; i < pitches.length; i = i + 4)
@@ -117,6 +117,7 @@ else
 		};
 		const getCurColor = () => curColor;
 		let curSegment;
+
 		const setSegments = async () => {
 			data.segments.forEach(segment => {
 				if (segment.start * 1000 >= start_ms)
@@ -147,8 +148,10 @@ else
 							bg.style.backgroundColor = `${getRandomColors(1)[0]}`;
 						}
 						if(getMode() === 2){
-							setColor(curSegment.pitches, 100);
-							bg.style.backgroundColor = `${getCurColor()}`;
+							setTimeout(() => {
+								setColor(undefined, 100);
+								bg.style.backgroundColor = `${getCurColor()}`;
+							},0);
 						}
 					}, (beat.start * 1000) - start_ms));
 				}
