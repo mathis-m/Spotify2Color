@@ -95,7 +95,7 @@ else
 		const tempDom = document.getElementById('temp');
 
 		let curColor = '';
-		const setColor = (pitches = curSegment, alpha) => {
+		const setColor = (pitches = curSegment.pitches, alpha) => {
 			const colorTemplate = (r, g, b) => `rgb${alpha ? 'a':''}(${r}%,${g}%,${b}%${alpha ? `,${alpha}%`:''})`;
 			let rgb = [];
 			for (let i = 0; i < pitches.length; i = i + 4)
@@ -126,7 +126,7 @@ else
 						curSegment = segment;
 						tempDom.innerText = segment.start;
 						if(getMode() === 2){
-							setColor(segment.pitches, 50);
+							setColor(segment.pitches, 70);
 							bg.style.backgroundColor =`${getCurColor()}`;
 							return;
 						}
@@ -149,7 +149,7 @@ else
 						}
 						if(getMode() === 2){
 							setTimeout(() => {
-								setColor(curSegment.pitches, 100);
+								setColor(undefined, 100);
 								bg.style.backgroundColor = `${getCurColor()}`;
 							},0);
 						}
