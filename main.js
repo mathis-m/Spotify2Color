@@ -92,7 +92,8 @@ else
 		
 		
 		const bg = document.getElementById('bg');
-		
+		const tempDom = document.getElementById('temp');
+
 		let curColor = '';
 		const setColor = (pitches) => {
 			const colorTemplate = (r, g, b) => `rgb(${r}%,${g}%,${b}%)`;
@@ -120,6 +121,8 @@ else
 				if (segment.start * 1000 >= start_ms)
 				{
 					timeOutIds.push(setTimeout(() => {
+						tempDom.innerText = segment.start;
+
 						setColor(segment.pitches);
 						if(getMode() === 2){
 							bg.style.backgroundColor =`${getCurColor()}`;
@@ -133,6 +136,7 @@ else
 				if (beat.start * 1000 >= start_ms)
 				{
 					timeOutIds.push(setTimeout(() => {
+						tempDom.innerText = beat.start;
 						if(getMode() === 1){
 							bg.style.backgroundColor = `${getCurColor()}`;
 						}
