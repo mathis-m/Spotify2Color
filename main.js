@@ -164,9 +164,10 @@ else
 		
 		const getColorFor = (pitches) => {
 			const res = {...colors[0]};
+			const arr = [...colors];
 			for (let i = 1; i < pitches.length; i++)
 			{
-				res.add(colors[i].multiply(pitches[i]));
+				res.add(arr[i].multiply(pitches[i]));
 			}
 			return res;
 		};
