@@ -108,7 +108,7 @@ else
 					p = [.1,.2,.3,.4];
 				}
 				let j = 0;
-				rgb.push(pitches.slice(i, i+3).reduce((pv, cv) => pv + (cv * p[j++]) * 100, 0);
+				rgb.push(pitches.slice(i, i+3).reduce((pv, cv) => pv + (cv * p[j++]) * 100, 0));
 			}
 			curColor = colorTemplate(...rgb);
 		};
