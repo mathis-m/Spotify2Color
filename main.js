@@ -116,11 +116,13 @@ else
 			curColor = colorTemplate(...rgb);
 		};
 		const getCurColor = () => curColor;
+		const curSegment;
 		const setSegments = async () => {
 			data.segments.forEach(segment => {
 				if (segment.start * 1000 >= start_ms)
 				{
 					timeOutIds.push(setTimeout(() => {
+						curSegment = segment;
 						tempDom.innerText = segment.start;
 						if(getMode() === 2){
 							setColor(segment.pitches, 50);
