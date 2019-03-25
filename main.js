@@ -95,8 +95,8 @@ else
 		const tempDom = document.getElementById('temp');
 
 		let curColor = '';
-		const setColor = (pitches) => {
-			const colorTemplate = (r, g, b) => `rgb(${r}%,${g}%,${b}%)`;
+		const setColor = (pitches, alpha) => {
+			const colorTemplate = (r, g, b) => `rgb(${r}%,${g}%,${b}%${alpha ? `,${alpha}%`:''})`;
 			let rgb = [];
 			for (let i = 0; i < pitches.length; i = i + 4)
 			{
@@ -122,11 +122,12 @@ else
 				{
 					timeOutIds.push(setTimeout(() => {
 						tempDom.innerText = segment.start;
-
-						setColor(segment.pitches);
 						if(getMode() === 2){
+							setColor(segment.pitches, 50);
 							bg.style.backgroundColor =`${getCurColor()}`;
+							return;
 						}
+						setColor(segment.pitches);
 					}, (segment.start * 1000) - start_ms));
 				}
 			})
@@ -144,7 +145,10 @@ else
 							bg.style.backgroundColor = `${getRandomColors(1)[0]}`;
 						}
 						if(getMode() === 2){
-							bg.style.backgroundColor = `white`;
+							setTimeout(() => {
+								setColor(curSegment.pitches, 100);
+								bg.style.backgroundColor = `${getCurColor()}`;
+							}, 0);
 						}
 					}, (beat.start * 1000) - start_ms));
 				}
