@@ -73,7 +73,6 @@ for (let i = 0; i < 12; i++)
 colors.push(colors.shift());
 colors.push(colors.shift());
 colors.push(colors.shift());
-colors.push(colors.shift());
 colors = colors.reverse();
 let mode = +document.getElementById('mode').value;
 document.getElementById('setMode').addEventListener('click', () => mode = +document.getElementById('mode').value);
@@ -203,6 +202,8 @@ else
 				const val = partials.splice(correctIndex, 1);
 				partials.splice(partials.findIndex((p,i) => p !== val && partials[i-1] !== val), 0, val);
 			}
+			console.log(pColors);
+			console.log(partials);
 			const pitchRatio = (pitch) =>  Math.floor(((pitch * 100) / sum) * 10) / 1000;
 			const cSum = partials.reduce((ac, cv) => ac.add(cv), partials[0]);
 			console.log(cSum);
