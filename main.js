@@ -199,7 +199,7 @@ else
 				partials.splice(partials.findIndex((p,i) => p !== val && partials[i-1] !== val), 0, val);
 			}
 			const pitchRatio = (pitch) =>  Math.floor(((pitch * 100) / sum) * 10) / 1000;
-			const cSum = partials.reduce((ac, cv) => ac.add(cv).multiply(pitchRatio(pitches[cv.index])), partials[0].multiply(pitchRatio(pitches[partials[0].index])));
+			const cSum = partials.reduce((ac, cv) => ac.add(cv), partials[0]);
 			return cSum;// cSum.div(partials.length);
 		};
 		
