@@ -199,7 +199,7 @@ else
 						curSegment = segment;
 						tempDom.innerText = segment.start;
 						setColor(getColorFor(segment.pitches));
-						if (getMode() === 2)
+						if (getMode() === 2 || getMode() === 3)
 						{
 							bg.style.backgroundColor = `${getCurColor()}`;
 						}
@@ -224,9 +224,7 @@ else
 						}
 						if (getMode() === 2)
 						{
-							setTimeout(() => {
-								colors.push(colors.shift());
-							}, 0);
+							colors.push(colors.shift());
 						}
 					}, (beat.start * 1000) - start_ms));
 				}
