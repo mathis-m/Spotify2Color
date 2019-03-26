@@ -183,9 +183,10 @@ else
 			return cSum;// cSum.div(partials.length);
 		};
 		
-		
+		let lastColor;
 		const setColor = (rgb = getColorFor(curSegment.pitches), alpha) => {
 			const colorTemplate = (r, g, b) => `rgb${alpha ? 'a' : ''}(${r}%,${g}%,${b}%${alpha ? `,${alpha}%` : ''})`;
+			lastColor = curColor;
 			curColor = colorTemplate(...rgb.getRGB());
 		};
 		const getCurColor = () => curColor;
@@ -204,12 +205,12 @@ else
 							let index = -1;
 							let value;
 							let compVal = c.getRGB();
-							colors.forEach(co => {
-								index++;
+							colors.forEach((co, ind) => {
 								let i = 0;
 								const value1 = co.getRGB().reduce((ac, cv) => ac += Math.abs(compVal[i++] - cv));
-								if(index === 0 || value1 < value){
+								if((index === 0 || value1 < value)&& !lastColor.eq(co)){
 									value = value1;
+									index = ind;
 								}
 							});
 							setColor(colors[index]);
