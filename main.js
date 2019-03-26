@@ -174,6 +174,7 @@ else
 		
 		
 		const getColorFor = (pitches) => {
+			console.table(pitches);
 			let sum = pitches.reduce((a, c) => a + c, 0);
 			const pColors = [...colors];
 			const partials = [];
@@ -204,6 +205,7 @@ else
 			}
 			const pitchRatio = (pitch) =>  Math.floor(((pitch * 100) / sum) * 10) / 1000;
 			const cSum = partials.reduce((ac, cv) => ac.add(cv), partials[0]);
+			console.log(cSum);
 			return cSum;// cSum.div(partials.length);
 		};
 		
