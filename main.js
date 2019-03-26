@@ -190,12 +190,12 @@ else
 				}
 			}
 			let correctIndex = 0;
-			const isDeSorted = (cv, i, arr) => {
-				const b = !cv.eq(arr[i + 1]) || i - 1 !== -1 && !cv.eq(arr[i - 1]);
+			const isDeSorted = (cv, i) => {
+				const b = !cv.eq(partials[i + 1]) || i - 1 !== -1 && !cv.eq(partials[i - 1]);
 				if(!b){
 					correctIndex = i;
 				}
-				return b || !b && arr.findIndex(v => !v.eq(cv)) === -1;
+				return b || !b && partials.findIndex(v => !v.eq(cv)) === -1;
 			};
 			while (!partials.every(isDeSorted))
 			{
