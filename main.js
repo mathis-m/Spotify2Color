@@ -46,7 +46,7 @@ const getColorForPitchN = (n) => {
 			this.r += color.r;
 			this.g += color.g;
 			this.b += color.b;
-			return this;
+			return this.div(2);
 		},
 		multiply: function (d) {
 			this.r *= d;
@@ -187,7 +187,7 @@ else
 			partials[0].b = 0;
 			const cSum = partials.reduce((ac, cv) => ac.add(cv),partials[0]);
 			
-			return cSum.div(partials.length);
+			return cSum// cSum.div(partials.length);
 		};
 		
 		
