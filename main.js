@@ -54,6 +54,12 @@ const getColorForPitchN = (n) => {
 			this.b *= d;
 			return this;
 		},
+		div: function (d) {
+			this.r /= d;
+			this.g /= d;
+			this.b /= d;
+			return this;
+		},
 		getRGB: function () {
 			return [this.r, this.g, this.b];
 		}
@@ -170,7 +176,7 @@ else
 			{
 				res.add({...arr[i]}.multiply(pitches[i]));
 			}
-			return res;
+			return res.div(pitches.length);
 		};
 		
 		
