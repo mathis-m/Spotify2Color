@@ -212,9 +212,8 @@ else
 				if (beat.start * 1000 >= start_ms)
 				{
 					timeOutIds.push(setTimeout(() => {
-						colors.push(colors.shift());
 						tempDom.innerText = beat.start;
-						if (getMode() === 1)
+						if (getMode() === 1 || getMode() === 4)
 						{
 							bg.style.backgroundColor = `${getCurColor()}`;
 						}
@@ -222,7 +221,7 @@ else
 						{
 							bg.style.backgroundColor = `${getRandomColors(1)[0]}`;
 						}
-						if (getMode() === 2)
+						if (getMode() === 3 || getMode() === 4)
 						{
 							colors.push(colors.shift());
 						}
