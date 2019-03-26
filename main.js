@@ -200,7 +200,7 @@ else
 			while (!partials.every(isDeSorted))
 			{
 				const val = partials.splice(correctIndex, 1)[0];
-				partials.splice(partials.findIndex((p,i) => !p.eq(val) && !partials[i-1].eq(val)), 0, ...val);
+				partials.splice(partials.findIndex((p,i) => !p.eq(val) && !partials[i-1].eq(val)), 0, val);
 			}
 			console.log(pColors);
 			console.log(partials);
