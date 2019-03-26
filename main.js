@@ -191,7 +191,7 @@ else
 			}
 			let correctIndex = 0;
 			const isDeSorted = (cv, i, arr) => {
-				const b = cv !== arr[i + 1] || i - 1 !== -1 && cv !== arr[i - 1];
+				const b = !cv.eq(arr[i + 1]) || i - 1 !== -1 && !cv.eq(arr[i + 1]);
 				if(!b){
 					correctIndex = i;
 				}
