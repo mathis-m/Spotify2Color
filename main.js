@@ -179,7 +179,7 @@ else
 			{
 				for (let j = 0; j < getCount(pitches[i]); j++)
 				{
-					partials.push({...pColors[i]})
+					partials.push({...pColors[i], index: i})
 				}
 			}
 			partials[0].r = 0;
@@ -198,7 +198,8 @@ else
 				const val = partials.splice(correctIndex, 1);
 				partials.splice(partials.findIndex((p,i) => p !== val && partials[i-1] !== val), 0, val);
 			}
-			const cSum = partials.reduce((ac, cv) => ac.add(cv), partials[0]);
+			const pitchRatio = (pitch) =>  Math.floor(((pitch * 100) / sum) * 10) / 1000;
+			const cSum = partials.reduce((ac, cv) => ac.add(cv).multiply(pitchRatio(pitches[cv.index])), partials[0].multiply(pitchRatio(pitches[partials[0].index])));
 			return cSum;// cSum.div(partials.length);
 		};
 		
