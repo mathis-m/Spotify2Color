@@ -179,33 +179,8 @@ else
 			console.table(pitches);
 			let sum = pitches.reduce((a, c) => a + c, 0);
 			const pColors = [...colors];
-			const partials = [];
-			const getCount = (p) => Math.floor(((p * 100) / sum) * 10) / 10;
-			
-			for (let i = 0; i < pitches.length; i++)
-			{
-				for (let j = 0; j < getCount(pitches[i]); j++)
-				{
-					partials.push({...pColors[i], index: i})
-				}
-			}
-			let correctIndex = 0;
-			const isDeSorted = (cv, i) => {
-				const b = !!partials[i + 1] && !cv.eq(partials[i + 1]) || i - 1 !== -1 && !cv.eq(partials[i - 1]);
-				if(!b){
-					correctIndex = i;
-				}
-				return b || !b && partials.findIndex(v => !v.eq(cv)) === -1;
-			};
-			while (!partials.every(isDeSorted))
-			{
-				const val = partials.splice(correctIndex, 1)[0];
-				partials.splice(partials.findIndex((p,i) => !p.eq(val) && i-1 !== -1 && !partials[i-1].eq(val)), 0, val);
-			}
-			console.log(pColors);
-			console.log(partials);
 			const pitchRatio = (pitch) =>  Math.floor(((pitch * 100) / sum) * 10) / 1000;
-			const cSum = partials.reduce((ac, cv) => ac.add(cv), partials[0]);
+			const cSum = partials.reduce((ac, cv) => ac.add(cv.multiply(pitchRatio(pitches[cv.index]))), {...pColors[0]}.multiply(pitchRatio(pitches[pColors[0].index])));
 			console.log(cSum);
 			return cSum;// cSum.div(partials.length);
 		};
