@@ -62,6 +62,9 @@ const getColorForPitchN = (n) => {
 		},
 		getRGB: function () {
 			return [this.r, this.g, this.b];
+		},
+		eq: function(color) {
+			return this.r === color.r && this.g === color.g && this.b === color.b;
 		}
 	};
 };
@@ -186,16 +189,13 @@ else
 					partials.push({...pColors[i], index: i})
 				}
 			}
-			partials[0].r = 0;
-			partials[0].g = 0;
-			partials[0].b = 0;
 			let correctIndex = 0;
 			const isDeSorted = (cv, i, arr) => {
 				const b = cv !== arr[i + 1] || i - 1 !== -1 && cv !== arr[i - 1];
 				if(!b){
 					correctIndex = i;
 				}
-				return b || !b && arr.findIndex(v => v !== cv) === -1;
+				return b || !b && arr.findIndex(v => !v.eq(cv)) === -1;
 			};
 			while (!partials.every(isDeSorted))
 			{
