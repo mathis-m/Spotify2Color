@@ -179,7 +179,7 @@ else
 			for (let i = 1; i < pitches.length; i++)
 			{
 				const ratio = Math.floor(((pitches[i] * 100) / sum)*10)/1000;
-				ret.add(pColors[i].multiply(ratio));
+				ret.add({...pColors[i]}.multiply(ratio));
 			}
 			return ret;
 		};
