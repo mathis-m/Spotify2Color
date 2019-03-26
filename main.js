@@ -180,6 +180,7 @@ else
 			{
 				res.add({...arr[i]}.multiply(pitches[i]));
 			}
+			colors = colors.reverse();
 			return res;
 		};
 		
