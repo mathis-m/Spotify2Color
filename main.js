@@ -173,14 +173,15 @@ else
 		
 		
 		const getColorFor = (pitches) => {
-			const res = {...colors[0]};
-			const arr = [...colors];
-			res.multiply(pitches[0]);
+			let sum = pitches.reduce((a, c) => a + c, 0);
+			const pColors = [...colors];
+			const ret = {...pColors[0]}.multiply(pitches[0] / sum);
 			for (let i = 1; i < pitches.length; i++)
 			{
-				res.add({...arr[i]}.multiply(pitches[i]));
+				const ratio = pitches[i] / sum;
+				ret.add(pColors[i].multiply(ratio));
 			}
-			return res;
+			return ret;
 		};
 		
 		
