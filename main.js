@@ -180,7 +180,6 @@ else
 			{
 				res.add({...arr[i]}.multiply(pitches[i]));
 			}
-			colors = colors.reverse();
 			return res;
 		};
 		
@@ -215,6 +214,7 @@ else
 				if (beat.start * 1000 >= start_ms)
 				{
 					timeOutIds.push(setTimeout(() => {
+						colors = colors.reverse();
 						tempDom.innerText = beat.start;
 						if (getMode() === 1)
 						{
