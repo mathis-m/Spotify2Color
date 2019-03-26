@@ -190,7 +190,7 @@ else
 		};
 		const getCurColor = () => curColor;
 		let curSegment;
-		
+		let z = true;
 		const setSegments = async () => {
 			data.segments.forEach(segment => {
 				if (segment.start * 1000 >= start_ms)
@@ -198,7 +198,23 @@ else
 					timeOutIds.push(setTimeout(() => {
 						curSegment = segment;
 						tempDom.innerText = segment.start;
-						setColor(getColorFor(segment.pitches));
+						const c = getColorFor(segment.pitches);
+						if(z){
+							let index = -1;
+							let value;
+							let compVal = c.getRGB();
+							colors.forEach(co => {
+								index++;
+								let i = 0;
+								const value1 = co.getRGB().reduce((ac, cv) => ac += Math.abs(compVal[i++] - cv));
+								if(index === 0 || value1 < value){
+									value = value1;
+								}
+							});
+							setColor(colors[index]);
+						}else{
+							setColor(c);
+						}
 						if (getMode() === 2 || getMode() === 3)
 						{
 							bg.style.backgroundColor = `${getCurColor()}`;
