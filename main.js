@@ -44,8 +44,11 @@ const getColorForPitchN = (n) => {
 		...ret,
 		add: function (color) {
 			this.r += color.r;
+			this.r /= 2;
 			this.g += color.g;
+			this.g /= 2;
 			this.b += color.b;
+			this.b /= 2;
 			return this;
 		},
 		multiply: function (d) {
@@ -176,7 +179,7 @@ else
 			{
 				res.add({...arr[i]}.multiply(pitches[i]));
 			}
-			return res.div(pitches.length);
+			return res;
 		};
 		
 		
