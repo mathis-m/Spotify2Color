@@ -196,6 +196,7 @@ else
 				if (segment.start * 1000 >= start_ms)
 				{
 					timeOutIds.push(setTimeout(() => {
+						z = !z;
 						curSegment = segment;
 						tempDom.innerText = segment.start;
 						const c = getColorFor(segment.pitches);
