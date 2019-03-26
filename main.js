@@ -214,7 +214,7 @@ else
 				if (beat.start * 1000 >= start_ms)
 				{
 					timeOutIds.push(setTimeout(() => {
-						colors = colors.reverse();
+						colors.push(colors.shift());
 						tempDom.innerText = beat.start;
 						if (getMode() === 1)
 						{
