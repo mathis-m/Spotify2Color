@@ -44,11 +44,8 @@ const getColorForPitchN = (n) => {
 		...ret,
 		add: function (color) {
 			this.r += color.r;
-			this.r /= 2;
 			this.g += color.g;
-			this.g /= 2;
 			this.b += color.b;
-			this.b /= 2;
 			return this;
 		},
 		multiply: function (d) {
@@ -175,13 +172,22 @@ else
 		const getColorFor = (pitches) => {
 			let sum = pitches.reduce((a, c) => a + c, 0);
 			const pColors = [...colors];
-			const ret = {...pColors[0]}.multiply(Math.floor(((pitches[0] * 100) / sum)*10)/1000);
-			for (let i = 1; i < pitches.length; i++)
+			const partials = [];
+			const getCount =(p)=> Math.floor(((p * 100) / sum)*10)/10;
+			
+			for (let i = 0; i < pitches.length; i++)
 			{
-				const ratio = Math.floor(((pitches[i] * 100) / sum)*10)/1000;
-				ret.add({...pColors[i]}.multiply(ratio));
+				for (let j = 0; j < getCount(pitches[i]); j++)
+				{
+					partials.push({...pColors[i]})
+				}
 			}
-			return ret;
+			partials[0].r = 0;
+			partials[0].g = 0;
+			partials[0].b = 0;
+			const cSum = partials.reduce((ac, cv) => ac.add(cv),partials[0]);
+			
+			return cSum.div(partials.length);
 		};
 		
 		
