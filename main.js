@@ -74,8 +74,6 @@ colors.push(colors.shift());
 colors.push(colors.shift());
 colors.push(colors.shift());
 colors.push(colors.shift());
-colors.push(colors.shift());
-colors.push(colors.shift());
 colors = colors.reverse();
 let mode = +document.getElementById('mode').value;
 document.getElementById('setMode').addEventListener('click', () => mode = +document.getElementById('mode').value);
