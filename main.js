@@ -175,7 +175,7 @@ else
 		const getColorFor = (pitches) => {
 			let sum = pitches.reduce((a, c) => a + c, 0);
 			const pColors = [...colors];
-			const ret = {...pColors[0]}.multiply(pitches[0] / sum);
+			const ret = {...pColors[0]}.multiply(Math.floor(((pitches[0] * 100) / sum)*10)/1000);
 			for (let i = 1; i < pitches.length; i++)
 			{
 				const ratio = pitches[i] / sum;
