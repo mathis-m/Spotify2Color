@@ -178,7 +178,7 @@ else
 			const ret = {...pColors[0]}.multiply(Math.floor(((pitches[0] * 100) / sum)*10)/1000);
 			for (let i = 1; i < pitches.length; i++)
 			{
-				const ratio = pitches[i] / sum;
+				const ratio = Math.floor(((pitches[i] * 100) / sum)*10)/1000;
 				ret.add(pColors[i].multiply(ratio));
 			}
 			return ret;
