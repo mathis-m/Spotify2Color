@@ -68,11 +68,12 @@ const getColorForPitchN = (n) => {
 		}
 	};
 };
-const colors = [];
+let colors = [];
 for (let i = 0; i < 12; i++)
 {
 	colors.push(getColorForPitchN(i));
 }
+colors = colors.reverse();
 let mode = +document.getElementById('mode').value;
 document.getElementById('setMode').addEventListener('click', () => mode = +document.getElementById('mode').value);
 const getMode = () => mode;
