@@ -173,7 +173,7 @@ else
 			let sum = pitches.reduce((a, c) => a + c, 0);
 			const pColors = [...colors];
 			const partials = [];
-			const getCount =(p)=> Math.floor(((p * 100) / sum)*10)/10;
+			const getCount = (p) => Math.floor(((p * 100) / sum) * 10) / 10;
 			
 			for (let i = 0; i < pitches.length; i++)
 			{
@@ -185,9 +185,21 @@ else
 			partials[0].r = 0;
 			partials[0].g = 0;
 			partials[0].b = 0;
-			const cSum = partials.reduce((ac, cv) => ac.add(cv),partials[0]);
-			
-			return cSum// cSum.div(partials.length);
+			let correctIndex = 0;
+			const isDeSorted = (cv, i, arr) => {
+				const b = cv !== arr[i + 1] || i - 1 !== -1 && cv !== arr[i - 1];
+				if(!b){
+					correctIndex = i;
+				}
+				return b;
+			};
+			while (!partials.every(isDeSorted))
+			{
+				const val = partials.splice(correctIndex, 1);
+				partials.splice(partials.findIndex((p,i) => p !== val && partials[i-1] !== val), 0, val);
+			}
+			const cSum = partials.reduce((ac, cv) => ac.add(cv), partials[0]);
+			return cSum;// cSum.div(partials.length);
 		};
 		
 		
