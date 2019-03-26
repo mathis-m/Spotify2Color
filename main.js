@@ -180,7 +180,7 @@ else
 			let sum = pitches.reduce((a, c) => a + c, 0);
 			const pColors = [...colors];
 			const pitchRatio = (pitch) =>  Math.floor(((pitch * 100) / sum) * 10) / 1000;
-			const cSum = partials.reduce((ac, cv) => ac.add(cv.multiply(pitchRatio(pitches[cv.index]))), {...pColors[0]}.multiply(pitchRatio(pitches[pColors[0].index])));
+			const cSum = pColors.reduce((ac, cv) => ac.add({...cv}.multiply(pitchRatio(pitches[cv.index]))), {...pColors[0]}.multiply(pitchRatio(pitches[pColors[0].index])));
 			console.log(cSum);
 			return cSum;// cSum.div(partials.length);
 		};
