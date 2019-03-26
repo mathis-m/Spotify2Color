@@ -198,13 +198,11 @@ else
 					timeOutIds.push(setTimeout(() => {
 						curSegment = segment;
 						tempDom.innerText = segment.start;
+						setColor(getColorFor(segment.pitches));
 						if (getMode() === 2)
 						{
-							setColor(getColorFor(segment.pitches), 70);
 							bg.style.backgroundColor = `${getCurColor()}`;
-							return;
 						}
-						setColor(getColorFor(segment.pitches));
 					}, (segment.start * 1000) - start_ms));
 				}
 			})
@@ -227,8 +225,7 @@ else
 						if (getMode() === 2)
 						{
 							setTimeout(() => {
-								setColor(undefined, 100);
-								bg.style.backgroundColor = `${getCurColor()}`;
+								colors.push(colors.shift());
 							}, 0);
 						}
 					}, (beat.start * 1000) - start_ms));
