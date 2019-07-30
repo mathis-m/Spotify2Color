@@ -87,7 +87,7 @@ let mode = +document.getElementById('mode').value;
 document.getElementById('setMode').addEventListener('click', () => mode = +document.getElementById('mode').value);
 const getMode = () => mode;
 const code = urlParams.get('access_token');
-if (!!code)
+if (false)
 {
 	window.opener.init(code).then(() => {
 		console.log('hey')
@@ -259,9 +259,9 @@ else
         crypto.getRandomValues(array);
         array = array.map(x => validChars.charCodeAt(x % validChars.length));
         const randomState = String.fromCharCode.apply(null, array);
-	window.init = init;
-	window.open(`https://accounts.spotify.com/authorize?client_id=19427274dbcb4d988f8c3e032508ad5a&response_type=token&redirect_uri=${encodeURIComponent('https://mathis-m.github.io/Spotify2Color/')}&state=${randomState}&scope=user-read-currently-playing&show_dialog=true`, 'Login with Spotify', 'width=800,height=600');
-	
+	if(!code)
+		window.location.href = `https://accounts.spotify.com/authorize?client_id=19427274dbcb4d988f8c3e032508ad5a&response_type=token&redirect_uri=${encodeURIComponent('https://mathis-m.github.io/Spotify2Color/')}&state=${randomState}&scope=user-read-currently-playing`;
+	else init(code);
 }
 
 
