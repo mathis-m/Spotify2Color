@@ -68,14 +68,6 @@ const getColorForPitchN = (n) => {
 		}
 	};
 };
-const scopes = [
-	'user-library-read',
-	'playlist-modify-public',
-	'playlist-read-private',
-	'playlist-modify-private',
-	'user-read-private',
-	'user-read-email'
-];
 
 let colors = [];
 for (let i = 0; i < 12; i++)
@@ -86,7 +78,9 @@ colors = colors.sort(function () { if (Math.random()<.5) return -1; else return 
 let mode = +document.getElementById('mode').value;
 document.getElementById('setMode').addEventListener('click', () => mode = +document.getElementById('mode').value);
 const getMode = () => mode;
-const code = urlParams.get('access_token');
+const map1 = location.hash.substring(1).split('&').map(kv => kv.split('='));
+const params = Array.from(map1).reduce((acc, [key, val]) => Object.assign(acc, {[key]: val}), {});
+const code = params['access_token'];
 if (false)
 {
 	window.opener.init(code).then(() => {
