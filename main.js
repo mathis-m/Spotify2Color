@@ -68,6 +68,15 @@ const getColorForPitchN = (n) => {
 		}
 	};
 };
+const scopes = [
+	'user-library-read',
+	'playlist-modify-public',
+	'playlist-read-private',
+	'playlist-modify-private',
+	'user-read-private',
+	'user-read-email'
+];
+
 let colors = [];
 for (let i = 0; i < 12; i++)
 {
@@ -77,7 +86,7 @@ colors = colors.sort(function () { if (Math.random()<.5) return -1; else return 
 let mode = +document.getElementById('mode').value;
 document.getElementById('setMode').addEventListener('click', () => mode = +document.getElementById('mode').value);
 const getMode = () => mode;
-const code = urlParams.get('code');
+const code = urlParams.get('access_token');
 if (!!code)
 {
 	window.opener.init(code).then(() => {
@@ -88,17 +97,6 @@ if (!!code)
 }
 else
 {
-	
-	const getAC =
-		(code) => fetch('https://accounts.spotify.com/api/token',
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/x-www-form-urlencoded",
-					"Authorization": `Basic MTk0MjcyNzRkYmNiNGQ5ODhmOGMzZTAzMjUwOGFkNWE6MDAxMDM1NDUwYTJlNDMxNGJiYTkyZDJiYjU3NDdjZmU=`
-				},
-				body: `code=${code}&grant_type=authorization_code&redirect_uri=${encodeURIComponent('https://mathis-m.github.io/Spotify2Color/')}`
-			}).then(res => res.json());
 	
 	const getCurSong = (ac) => {
 		const url = 'https://api.spotify.com/v1/me/player/currently-playing';
@@ -252,14 +250,17 @@ else
 		
 	};
 	
-	const init = async (code) => {
-		const ac = (await getAC(code)).access_token;
+	const init = async (ac) => {
 		await poll(ac, (analyseData) => buildColors(analyseData, ac));
 	};
 	
-	
+	const validChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let array = new Uint8Array(40);
+        crypto.getRandomValues(array);
+        array = array.map(x => validChars.charCodeAt(x % validChars.length));
+        const randomState = String.fromCharCode.apply(null, array);
 	window.init = init;
-	window.open(`https://accounts.spotify.com/authorize?client_id=19427274dbcb4d988f8c3e032508ad5a&response_type=code&redirect_uri=${encodeURIComponent('https://mathis-m.github.io/Spotify2Color/')}&scope=user-read-currently-playing&show_dialog=true`, 'Login with Spotify', 'width=800,height=600');
+	window.open(`https://accounts.spotify.com/authorize?client_id=19427274dbcb4d988f8c3e032508ad5a&response_type=token&redirect_uri=${encodeURIComponent('https://mathis-m.github.io/Spotify2Color/')}&state=${randomState}&scope=user-read-currently-playing&show_dialog=true`, 'Login with Spotify', 'width=800,height=600');
 	
 }
 
